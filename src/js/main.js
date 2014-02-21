@@ -1,8 +1,8 @@
 window.onload = function () {
   'use strict';
 
-  var game
-    , ns = window['tutorial'];
+  var game,
+      ns = window['tutorial'];
 
   game = new Phaser.Game(640, 480, Phaser.AUTO, 'tutorial-game');
   game.state.add('boot', ns.Boot);
@@ -12,3 +12,4 @@ window.onload = function () {
 
   game.state.start('boot');
 };
+

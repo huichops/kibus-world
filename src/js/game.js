@@ -8,8 +8,8 @@
   Game.prototype = {
 
     create: function () {
-      var x = this.game.width / 2
-        , y = this.game.height / 2;
+      var x = this.game.width / 2,
+          y = this.game.height / 2;
 
       this.player = this.add.sprite(x, y, 'player');
       this.player.anchor.setTo(0.5, 0.5);
@@ -45,3 +45,4 @@
   window['tutorial'].Game = Game;
 
 }());
+
