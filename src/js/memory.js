@@ -3,12 +3,22 @@
 
   function Pathfinder() {
     this.path = [];
+    this.returnPath = [];
   }
 
   Pathfinder.prototype = {
 
-    add: function (dir) {
+    getPath: function() {
+      return this.path;
+    },
+
+    getReturnPath: function() {
+      return this.returnPath;
+    },
+
+    push: function (dir) {
       this.path.push(dir);
+      this.returnPath.unshift(this.reverseDirection(dir));
     },
 
     reverseDirection: function (dir) {
@@ -27,8 +37,9 @@
 
     log: function () {
       console.log('test');
-    }
+    },
 
+    
   };
 
   window.Pathfinder = Pathfinder;
