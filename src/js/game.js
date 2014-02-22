@@ -3,16 +3,22 @@
 
   function Game() {
     this.player = null;
+    this.kibus = null;
   }
 
   Game.prototype = {
 
     create: function () {
-      var x = this.game.width / 2,
-          y = this.game.height / 2;
+      // var x = this.game.width / 2,
+      //     y = this.game.height / 2;
+      var x = 30,
+          y = 30;
 
       this.player = this.add.sprite(x, y, 'player');
       this.player.anchor.setTo(0.5, 0.5);
+      this.kibus = this.add.sprite(0, 1, 'kibus');
+      this.kibus.animations.add('walk');
+      this.kibus.animations.play('walk', 7, true);
       this.input.onDown.add(this.onInputDown, this);
     },
 
