@@ -32,5 +32,5 @@
   window['tutorial'] = window['tutorial'] || {};
   window['tutorial'].Boot = Boot;
 
-}());
+})();
 

@@ -1,15 +1,17 @@
-var gulp = require('gulp')
-  , gutil = require('gulp-util')
-  , concat = require('gulp-concat')
-  , rename = require('gulp-rename')
-  , minifycss = require('gulp-minify-css')
-  , minifyhtml = require('gulp-minify-html')
-  , processhtml = require('gulp-processhtml')
-  , jshint = require('gulp-jshint')
-  , uglify = require('gulp-uglify')
-  , connect = require('gulp-connect')
-  , download = require('gulp-download')
-  , paths;
+var gulp = require('gulp'),
+  gutil = require('gulp-util'),
+  concat = require('gulp-concat'),
+  rename = require('gulp-rename'),
+  minifycss = require('gulp-minify-css'),
+  minifyhtml = require('gulp-minify-html'),
+  processhtml = require('gulp-processhtml'),
+  jshint = require('gulp-jshint'),
+  uglify = require('gulp-uglify'),
+  connect = require('gulp-connect'),
+  download = require('gulp-download'),
+  mocha = require('gulp-mocha'),
+  spawn = require('child_process').spawn,
+  paths;
 
 paths = {
   assets: 'src/assets/**/*',
@@ -68,6 +70,27 @@ gulp.task('jshint', function() {
     .pipe(jshint.reporter('default'));
 });
 
+gulp.task('test', function() {
+  var 
+  args = [ __dirname + '/test/index.html' ]; 
+  phantomMochaChild = spawn( 'mocha-phantomjs', args );
+
+  phantomMochaChild.stdout.on( 'data', function(data) {
+    gutil.log( 'Tests', data.toString().slice(0, -1) );
+  });
+
+  phantomMochaChild.on( 'close', function(code) {
+    var success = code === 0;
+    if (success) gutil.log( 'phantom did it well\!');
+  });
+
+});
+
+gulp.task('watch', function () {
+  gulp.watch(paths.js, ['jshint', 'test']);
+  gulp.watch(['./src/index.html', paths.css, paths.js], connect.reload);
+});
+
 gulp.task('connect', connect.server({
   root: [__dirname + '/src'],
   port: 9000,
@@ -77,10 +100,6 @@ gulp.task('connect', connect.server({
   }
 }));
 
-gulp.task('watch', function () {
-  gulp.watch(paths.js, ['jshint']);
-  gulp.watch(['./src/index.html', paths.css, paths.js], connect.reload);
-});
 
 gulp.task('default', ['connect', 'watch']);
 gulp.task('build', ['copy', 'uglify', 'minifycss', 'processhtml', 'minifyhtml']);

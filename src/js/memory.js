@@ -1,4 +1,4 @@
-(function() {
+(function( exports ) {
   'use strict';
 
   function Pathfinder() {
@@ -16,13 +16,14 @@
       return this.returnPath;
     },
 
-    push: function (dir) {
-      this.path.push(dir);
-      this.returnPath.unshift(this.reverseDirection(dir));
+    push: function( dir ) {
+      this.path.push( dir );
+      this.returnPath.unshift( this.reverseDirection(dir) );
+      return this;
     },
 
-    reverseDirection: function (dir) {
-      switch (dir) {
+    reverseDirection: function( dir ) {
+      switch ( dir ) {
         case 'LEFT':  return 'RIGHT';
         case 'RIGHT': return 'LEFT';
         case 'UP':    return 'DOWN';
@@ -31,19 +32,16 @@
       }
     },
 
-    pop: function () {
-      return this.reverseDirection(this.path.pop());
+    pop: function() {
+      return this.reverseDirection( this.path.pop() );
     },
 
-    log: function () {
+    log: function() {
       console.log('test');
     },
 
-    
   };
 
-  window.Pathfinder = Pathfinder;
-
-
-}());
+  exports.Pathfinder = Pathfinder;
+})( this );
 

@@ -19,6 +19,7 @@
     update: function () {
       var x, y, cx, cy, dx, dy, angle, scale;
 
+
       x = this.input.position.x;
       y = this.input.position.y;
       cx = this.world.centerX;
@@ -44,5 +45,5 @@
   window['tutorial'] = window['tutorial'] || {};
   window['tutorial'].Game = Game;
 
-}());
+})();
 

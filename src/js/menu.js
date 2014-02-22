@@ -39,5 +39,5 @@
   window['tutorial'] = window['tutorial'] || {};
   window['tutorial'].Menu = Menu;
 
-}());
+})();
 

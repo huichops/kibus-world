@@ -36,4 +36,5 @@
   window['tutorial'] = window['tutorial'] || {};
   window['tutorial'].Preloader = Preloader;
 
-}());
+})();
+
