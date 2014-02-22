@@ -14,6 +14,7 @@ var gulp = require('gulp'),
   paths;
 
 paths = {
+  test: 'test/**/*',
   assets: 'src/assets/**/*',
   css:    'src/css/*.css', 
   js:     ['src/js/**/*.js', '!src/js/lib/*.js'],
@@ -81,14 +82,8 @@ gulp.task('test', function() {
 
   phantomMochaChild.on( 'close', function(code) {
     var success = code === 0;
-    if (success) gutil.log( 'phantom did it well\!');
   });
 
-});
-
-gulp.task('watch', function () {
-  gulp.watch(paths.js, ['jshint', 'test']);
-  gulp.watch(['./src/index.html', paths.css, paths.js], connect.reload);
 });
 
 gulp.task('connect', connect.server({
@@ -100,6 +95,10 @@ gulp.task('connect', connect.server({
   }
 }));
 
+gulp.task('watch', function () {
+  gulp.watch([paths.js, paths.test], ['jshint', 'test']);
+  gulp.watch(['./src/index.html', paths.css, paths.js], connect.reload);
+});
 
 gulp.task('default', ['connect', 'watch']);
 gulp.task('build', ['copy', 'uglify', 'minifycss', 'processhtml', 'minifyhtml']);

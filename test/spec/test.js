@@ -1,20 +1,7 @@
 (function() {
   'use strict';
 
-  var 
-  pf = new Pathfinder(),
-  dir = {
-    L: 'LEFT',
-    R: 'RIGHT',
-    U: 'UP',
-    D: 'DOWN'
-  },
-  paths = [
-    [ dir.L, dir.R, dir.U, dir.D ],
-    [ ],
-    [ ],
-  ];
-  
+  var pf = new Pathfinder();
 
   describe('Pathfinder object', function () {
     describe('Constructor', function() {
@@ -34,19 +21,29 @@
     });
 
     describe('main methods', function() {
+
+      it('should return the reversed directions', function() {
+        pf.reverseDirection('LEFT').should.equal('RIGHT');
+        pf.reverseDirection('RIGHT').should.equal('LEFT');
+        pf.reverseDirection('UP').should.equal('DOWN');
+        pf.reverseDirection('DOWN').should.equal('UP');
+      });
+
       it('should return the same path', function() {
-        pf.push(dir.L)
-          .push(dir.R)
-          .push(dir.U)
-          .push(dir.D).getPath()
+        pf.push('LEFT')
+          .push('RIGHT')
+          .push('UP')
+          .push('DOWN')
+          .getPath()
         .should.eql(['LEFT', 'RIGHT', 'UP', 'DOWN']);
       });
+
       it('should return the path reversed', function() {
         pf.getReturnPath()
           .should.eql(['UP', 'DOWN', 'LEFT', 'RIGHT']);
       });
+        
     });
-
   });
 
 })();

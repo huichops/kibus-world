@@ -43,5 +43,6 @@
   };
 
   exports.Pathfinder = Pathfinder;
+
 })( this );
 
