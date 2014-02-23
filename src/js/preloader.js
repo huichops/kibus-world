@@ -8,28 +8,29 @@
 
   Preloader.prototype = {
 
-    preload: function () {
+    preload: function() {
       this.asset = this.add.sprite(320, 240, 'preloader');
       this.asset.anchor.setTo(0.5, 0.5);
 
       this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
       this.load.setPreloadSprite(this.asset);
       this.load.image('player', 'assets/player.png');
+      this.load.image('floor', 'assets/floor.png');
       this.load.spritesheet('kibus', 'assets/kibus.png', 250, 368);
       this.load.bitmapFont('minecraftia', 'assets/minecraftia.png', 'assets/minecraftia.xml');
     },
 
-    create: function () {
+    create: function() {
       this.asset.cropEnabled = false;
     },
 
-    update: function () {
+    update: function() {
       if (!!this.ready) {
         this.game.state.start('menu');
       }
     },
 
-    onLoadComplete: function () {
+    onLoadComplete: function() {
       this.ready = true;
     }
   };
