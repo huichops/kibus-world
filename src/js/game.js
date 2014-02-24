@@ -2,8 +2,8 @@
   'use strict';
 
   var map = [],
-      ROWS = 15,
-      COLS = 15;
+      ROWS = 10,
+      COLS = 10;
 
   function initMap() {
     var
@@ -25,6 +25,24 @@
 
   }
 
+  function drawMap() {
+    var
+    i,
+    j;
+
+    for ( i = 0; i < ROWS; i++ ) {
+      for ( j = 0; j < COLS; j++ ) {
+        var rand = this.rnd.frac();
+        console.log(rand);
+        if ( rand < 0.8 ) {
+          this.add.sprite(i*64, j*64, 'floor');
+        } else {
+          this.add.sprite(i*64, j*64, 'obstacles');
+        }
+      }
+    }
+  }
+
   function Game() {
     this.player = null;
     this.kibus = null;
@@ -34,45 +52,27 @@
   Game.prototype = {
 
     create: function() {
-      var
-      x = this.game.width / 2,
-      y = this.game.height / 2;
 
-      this.player = this.add.sprite(x, y, 'player');
-      this.player.anchor.setTo(0.5, 0.5);
 
-      this.kibus = this.add.sprite(0, 1, 'kibus');
-      this.kibus.animations.add('walk');
-      this.kibus.animations.play('walk', 7, true);
-
-      this.tiles = this.add.sprite(200, 200, 'floor');
 
       this.input.onDown.add(this.onInputDown, this);
-      initMap();
+
+      drawMap.apply(this);
+      // initMap();
+      this.kibus = this.add.sprite(64, 64, 'kibus');
+      this.kibus.animations.add( 'walk', [0, 1, 0, 2], true );
+      this.kibus.animations.add( 'idle', [0], true );
+      this.kibus.animations.play('walk', 6, true);
+
     },
 
     update: function() {
-      var x, y, cx, cy, dx, dy, angle, scale;
-
-
-      x = this.input.position.x;
-      y = this.input.position.y;
-      cx = this.world.centerX;
-      cy = this.world.centerY;
-
-      angle = Math.atan2(y - cy, x - cx) * (180 / Math.PI);
-      this.player.angle = angle;
-
-      dx = x - cx;
-      dy = y - cy;
-      scale = Math.sqrt(dx * dx + dy * dy) / 100;
-
-      this.player.scale.x = scale * 0.6;
-      this.player.scale.y = scale * 0.6;
     },
 
     onInputDown: function () {
-      this.game.state.start('menu');
+      // this.game.state.start('menu');
+      if ( this.kibus.animations.currentAnim.name === 'walk' ) this.kibus.animations.play('idle');
+      else this.kibus.animations.play('walk', 6, true);
     }
 
   };
