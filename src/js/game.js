@@ -21,7 +21,7 @@
       }
       map.push(row);
     }
-    console.log(map);
+    // console.log(map);
 
   }
 
@@ -33,8 +33,8 @@
     for ( i = 0; i < ROWS; i++ ) {
       for ( j = 0; j < COLS; j++ ) {
         var rand = this.rnd.frac();
-        console.log(rand);
-        if ( rand < 0.8 ) {
+        // console.log(rand);
+        if ( rand < 0.7 ) {
           this.add.sprite(i*64, j*64, 'floor');
         } else {
           this.add.sprite(i*64, j*64, 'obstacles');
@@ -47,15 +47,16 @@
     this.player = null;
     this.kibus = null;
     this.tiles = null;
+    this.cursors = null;
   }
 
   Game.prototype = {
 
     create: function() {
 
-
-
       this.input.onDown.add(this.onInputDown, this);
+      this.cursors = this.input.keyboard.createCursorKeys();
+
 
       drawMap.apply(this);
       // initMap();
@@ -67,6 +68,23 @@
     },
 
     update: function() {
+
+      if ( this.cursors.up.isDown ) {
+        this.kibus.body.velocity.y = -200;
+      } else if ( this.cursors.down.isDown ) {
+        this.kibus.body.velocity.y = 200;
+      } else {
+        this.kibus.body.velocity.y = 0;
+      }
+
+      if ( this.cursors.left.isDown ) {
+        this.kibus.body.velocity.x = -200;
+      } else if ( this.cursors.right.isDown ) {
+        this.kibus.body.velocity.x = 200;
+      } else {
+        this.kibus.body.velocity.x = 0;
+      }
+
     },
 
     onInputDown: function () {
