@@ -13,7 +13,7 @@
           y = this.game.height / 2;
 
 
-      this.titleTxt = this.add.bitmapText(x, y, 'Example Game',
+      this.titleTxt = this.add.bitmapText(x, y, 'Mundo de Kibus',
         {font: '16px minecraftia', align: 'center'});
 
       this.titleTxt.anchor.setTo(0.5, 0.5);
