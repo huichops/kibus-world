@@ -1,4 +1,4 @@
-kibus-world
+Kibus World
 ===========
 
 Proyecto para clase de de Inteligencia Artificial
