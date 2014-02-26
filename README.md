@@ -26,10 +26,10 @@ Build
 
 Se necesita NodeJS y tener instalado Gulp para ejecutar el proyecto localmente.
 
-1. Sino se tiene instalado Gulp hay que instalarlo
-  `npm -g install gulp`
-2. Clonar el repositorio
+1. Clonar el repositorio
   `git clone https://github.com/rivfader/kibus-world.git`
-3. Cambiarse al directorio de la repo y ejecutar Gulp
-  `cd kibus-world; gulp`
+2. Instalar las dependencias
+  `cd kibus-world/; npm install`
+3. Ejecutar Gulp
+  `gulp`
 
