@@ -34,7 +34,7 @@
       for ( j = 0; j < COLS; j++ ) {
         var rand = this.rnd.frac();
         // console.log(rand);
-        if ( rand < 0.7 ) {
+        if ( rand < 0.75 ) {
           this.add.sprite(i*64, j*64, 'floor');
         } else {
           this.add.sprite(i*64, j*64, 'obstacles');
@@ -52,6 +52,9 @@
 
   Game.prototype = {
 
+    preload: function() {
+      this.kibus = new Kibus(this);
+    },
     create: function() {
 
       this.input.onDown.add(this.onInputDown, this);
@@ -60,37 +63,22 @@
 
       drawMap.apply(this);
       // initMap();
-      this.kibus = this.add.sprite(64, 64, 'kibus');
-      this.kibus.animations.add( 'walk', [0, 1, 0, 2], true );
-      this.kibus.animations.add( 'idle', [0], true );
-      this.kibus.animations.play('walk', 6, true);
+      this.kibus.create();
+      //this.kibus = this.add.sprite(64, 64, 'kibus');
+      //this.kibus.animations.add( 'walk', [0, 1, 0, 2], true );
+      //this.kibus.animations.add( 'idle', [0], true );
+      //this.kibus.animations.play('walk', 6, true);
 
     },
 
     update: function() {
 
-      if ( this.cursors.up.isDown ) {
-        this.kibus.body.velocity.y = -200;
-      } else if ( this.cursors.down.isDown ) {
-        this.kibus.body.velocity.y = 200;
-      } else {
-        this.kibus.body.velocity.y = 0;
-      }
-
-      if ( this.cursors.left.isDown ) {
-        this.kibus.body.velocity.x = -200;
-      } else if ( this.cursors.right.isDown ) {
-        this.kibus.body.velocity.x = 200;
-      } else {
-        this.kibus.body.velocity.x = 0;
-      }
+      this.kibus.update();
 
     },
 
     onInputDown: function () {
       // this.game.state.start('menu');
-      if ( this.kibus.animations.currentAnim.name === 'walk' ) this.kibus.animations.play('idle');
-      else this.kibus.animations.play('walk', 6, true);
     }
 
   };
