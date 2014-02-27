@@ -32,47 +32,49 @@
 
     for ( i = 0; i < ROWS; i++ ) {
       for ( j = 0; j < COLS; j++ ) {
-        var rand = this.rnd.frac();
-        // console.log(rand);
-        if ( rand < 0.75 ) {
+        var 
+        freq = this.rnd.frac(),
+        frame = this.rnd.integerInRange(0,2);
+
+        if ( freq < 0.8 ) {
           this.add.sprite(i*64, j*64, 'floor');
         } else {
-          this.add.sprite(i*64, j*64, 'obstacles');
+          var o = this.obstacles .create( i*64, j*64, 'obstacles', frame);
+          o.name = 'obs' + i;
+
+          o.body.immovable = true;
+          
         }
       }
     }
   }
 
   function Game() {
-    this.player = null;
     this.kibus = null;
-    this.tiles = null;
-    this.cursors = null;
+    this.obstacles = null;
   }
 
   Game.prototype = {
 
     preload: function() {
       this.kibus = new Kibus(this);
-    },
+    }, 
+    
     create: function() {
 
-      this.input.onDown.add(this.onInputDown, this);
-      this.cursors = this.input.keyboard.createCursorKeys();
-
+      this.obstacles = this.add.group();
 
       drawMap.apply(this);
       // initMap();
       this.kibus.create();
-      //this.kibus = this.add.sprite(64, 64, 'kibus');
-      //this.kibus.animations.add( 'walk', [0, 1, 0, 2], true );
-      //this.kibus.animations.add( 'idle', [0], true );
-      //this.kibus.animations.play('walk', 6, true);
-
     },
 
     update: function() {
 
+      /*this.physics.collide( this.kibus.sprite,
+          this.obstacles,
+          null, null, this );
+          */
       this.kibus.update();
 
     },

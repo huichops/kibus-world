@@ -18,6 +18,7 @@ Kibus.prototype = {
     this.sprite.animations.add('walk', [0, 1, 0, 2], true);
     this.sprite.animations.add('idle', [0], true);
     this.sprite.animations.play('walk', 6, true);
+    this.sprite.body.collideWorldBounds = true;
 
     this.cursors = this.game.input.keyboard.createCursorKeys();
   },
