@@ -9,16 +9,18 @@
   Preloader.prototype = {
 
     preload: function() {
-      var kibus = new Kibus(this);
+      var 
+      world = new World(this),
+      kibus = new Kibus(this);
+      
       kibus.preload();
+      world.preload();
 
       this.asset = this.add.sprite(320, 240, 'preloader');
       this.asset.anchor.setTo(0.5, 0.5);
 
       this.load.onLoadComplete.addOnce(this.onLoadComplete, this);
       this.load.setPreloadSprite(this.asset);
-      this.load.image('floor', 'assets/floor.png');
-      this.load.spritesheet('obstacles', 'assets/obstacles.png', 64, 64);
 
       this.load.bitmapFont('minecraftia', 'assets/minecraftia.png', 'assets/minecraftia.xml');
     },
