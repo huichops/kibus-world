@@ -53,7 +53,6 @@
 
     collideTile: function(x, y) {
       
-      console.log( x, y );
       if (y < 0 || y >= this.ROWS) {
         return true;
       } else if (x < 0 || x >= this.COLS) {
