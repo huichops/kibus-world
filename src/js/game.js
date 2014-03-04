@@ -16,20 +16,12 @@
     
     create: function() {
 
-      //this.obstacles = this.add.group();
-
-      //drawMap.apply(this);
-      //initMap();
       this.world.create();
       this.kibus.create();
     },
 
     update: function() {
 
-      /*this.physics.collide( this.kibus.sprite,
-          this.obstacles,
-          null, null, this );
-          */
       this.kibus.update();
 
     },

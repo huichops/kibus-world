@@ -32,25 +32,40 @@
     update: function() {
 
       if (this.cursors.up.isDown) {
-        this.sprite.body.velocity.y = -200;
+
+        if (!this.game.world.collideTile(this.tileX, this.tileY - 1)) {
+          this.setTilePos(this.tileX, this.tileY - 1);
+        }
 
       } else if (this.cursors.down.isDown) {
-        this.sprite.body.velocity.y = 200;
 
-      } else {
-        this.sprite.body.velocity.y = 0;
+        if (!this.game.world.collideTile(this.tileX, this.tileY + 1)) {
+          this.setTilePos(this.tileX, this.tileY + 1);
+        }
       }
 
       if (this.cursors.left.isDown) {
-        this.sprite.body.velocity.x = -200;
+
+        if (!this.game.world.collideTile(this.tileX - 1, this.tileY)) {
+          this.setTilePos(this.tileX - 1, this.tileY);
+        }
 
       } else if (this.cursors.right.isDown) {
-        this.sprite.body.velocity.x = 200;
 
-      } else {
-        this.sprite.body.velocity.x = 0;
+        if (!this.game.world.collideTile(this.tileX + 1, this.tileY)) {
+          console.log(this.tileX, this.tileY);
+          this.setTilePos(this.tileX + 1, this.tileY);
+        }
       }
+    }, 
 
+    setTilePos: function(x, y) {
+      console.log(this);
+      this.sprite.body.x = x*this.game.world.size;
+      this.sprite.body.y = y*this.game.world.size;
+      this.tileX = x;
+      this.tileY = y;
+      //this.sprite.body.x
     }
     
   };
