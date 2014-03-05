@@ -4,20 +4,22 @@
   function Game() {
     this.kibus = null;
     this.obstacles = null;
-    this.world = null;
+    this.worldd = null;
   }
 
   Game.prototype = {
 
     preload: function() {
       this.kibus = new Kibus(this);
-      this.world = new World(this);
+      this.worldd = new World(this);
     }, 
     
     create: function() {
 
-      this.world.create();
+      this.worldd.create();
       this.kibus.create();
+      this.world.setBounds(0, 0, 640, 640);
+      this.game.camera.follow(this.kibus.sprite);
     },
 
     update: function() {

@@ -7,6 +7,7 @@
     this.pf = null;
     this.sprite = null;
     this.cursors = null;
+    this.returnTween = null;
     this.moving = false;
     this.tileX = 0;
     this.tileY = 0;
@@ -25,7 +26,6 @@
       this.sprite.animations.add('walk', [0, 1, 0, 2], true);
       this.sprite.animations.add('idle', [0], true);
       this.sprite.animations.play('walk', 6, true);
-      this.sprite.body.collideWorldBounds = true;
 
       this.cursors = this.game.input.keyboard.createCursorKeys();
     },
@@ -34,29 +34,31 @@
 
       if (this.cursors.up.isDown) {
 
-        if (!this.game.world.collideTile(this.tileX, this.tileY - 1)) {
+        if (!this.game.worldd.collideTile(this.tileX, this.tileY - 1)) {
           this.setTilePos(this.tileX, this.tileY - 1);
           this.pf.push('UP');
+          this.game.camera.y -= this.game.worldd.size;
         }
 
       } else if (this.cursors.down.isDown) {
 
-        if (!this.game.world.collideTile(this.tileX, this.tileY + 1)) {
+        if (!this.game.worldd.collideTile(this.tileX, this.tileY + 1)) {
           this.setTilePos(this.tileX, this.tileY + 1);
           this.pf.push('DOWN');
+          this.game.camera.y += this.game.worldd.size;
         }
       }
 
       if (this.cursors.left.isDown) {
 
-        if (!this.game.world.collideTile(this.tileX - 1, this.tileY)) {
+        if (!this.game.worldd.collideTile(this.tileX - 1, this.tileY)) {
           this.setTilePos(this.tileX - 1, this.tileY);
           this.pf.push('LEFT');
         }
 
       } else if (this.cursors.right.isDown) {
 
-        if (!this.game.world.collideTile(this.tileX + 1, this.tileY)) {
+        if (!this.game.worldd.collideTile(this.tileX + 1, this.tileY)) {
           this.pf.push('RIGHT');
           this.setTilePos(this.tileX + 1, this.tileY);
         }
@@ -64,12 +66,20 @@
     }, 
 
     setTilePos: function(x, y) {
-      this.sprite.body.x = x*this.game.world.size;
-      this.sprite.body.y = y*this.game.world.size;
+      this.sprite.body.x = x*this.game.worldd.size;
+      this.sprite.body.y = y*this.game.worldd.size;
       this.tileX = x;
       this.tileY = y;
-      console.log(this.pf.getReturnPath());
       //this.sprite.body.x
+    },
+  
+    onComplete: function() {
+
+    },
+
+    returnToHouse: function() {
+      this.returnTween = this.game.add.tween(this.sprite)
+        .to({ x: 0, y: 0 }, 500, Phaser.Easing.Linear.None);
     }
     
   };
