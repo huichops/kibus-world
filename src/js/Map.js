@@ -44,7 +44,6 @@
 
         }
       }
-      console.log(this.data);
     },
 
     update: function() {

@@ -8,7 +8,8 @@
     this.sprite = null;
     this.cursors = null;
     this.returnTween = null;
-    this.moving = false;
+    this.tween = null;
+    this.canMove = true;
     this.tileX = 0;
     this.tileY = 0;
 
@@ -32,6 +33,11 @@
 
     update: function() {
 
+      if (this.tween == null || !this.tween.isRunning) this.move();
+    },
+
+    move: function() {
+      if (!this.canMove) return;
       if (this.cursors.up.isDown) {
 
         if (!this.game.worldd.collideTile(this.tileX, this.tileY - 1)) {
@@ -63,13 +69,17 @@
           this.setTilePos(this.tileX + 1, this.tileY);
         }
       }
-    }, 
+    },
 
     setTilePos: function(x, y) {
-      this.sprite.body.x = x*this.game.worldd.size;
-      this.sprite.body.y = y*this.game.worldd.size;
+      //this.sprite.body.x = x*this.game.worldd.size;
+      //this.sprite.body.y = y*this.game.worldd.size;
       this.tileX = x;
       this.tileY = y;
+      this.tween = this.game.add.tween(this.sprite)
+        .to({x: x*this.game.worldd.size, y: y*this.game.worldd.size},
+            250, Phaser.Easing.Linear.None, true);
+
       //this.sprite.body.x
     },
   
@@ -79,7 +89,7 @@
 
     returnToHouse: function() {
       this.returnTween = this.game.add.tween(this.sprite)
-        .to({ x: 0, y: 0 }, 500, Phaser.Easing.Linear.None);
+        .to({ x: 0, y: 0 }, 500, Phaser.Easing.Linear.None, true);
     }
     
   };
