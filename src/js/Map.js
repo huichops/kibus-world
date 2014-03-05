@@ -20,28 +20,42 @@
       this.game.load.spritesheet('obstacles', 'assets/obstacles.png', 64, 64);
     },
 
-    create: function() {
+    draw: function() {
+
       var
       size = 64,
+      frame,
       i,
       j;
+
+      for (i = 0; i < this.ROWS; i++) {
+        for (j = 0; j < this.COLS; j++) {
+          frame = this.game.rnd.integerInRange(0, 2);
+          if (this.data[i][j] === 0) {
+            this.game.add.sprite(i*size, j*size, 'floor');
+          } else {
+            this.game.add.sprite(i*size, j*size, 'obstacles', frame);
+          }
+        }
+      }
+    },
+
+    create: function() {
+
+      var
+      i,
+      j;
+
       for (i = 0; i < this.ROWS; i++) {
         this.data[i] = [];
         for (j = 0; j < this.COLS; j++) {
-          var
-          freq = this.game.rnd.frac(),
-          frame = this.game.rnd.integerInRange(0, 2);
+          var freq = this.game.rnd.frac();
+
           if ( freq < 0.8 ) {
             this.data[i][j] = 0;
-            this.game.add.sprite(i*size, j*size, 'floor');
           } else {
             this.data[i][j] = 1;
-            this.game.add.sprite(i*size, j*size, 'obstacles', frame);
-            //var o = this.obstacles.create(i*size, j*size, 'obstacles', frame);
-            //o.name = 'obs' + i;
-          
           }
-
         }
       }
     },

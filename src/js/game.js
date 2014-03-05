@@ -6,15 +6,15 @@
   Game.prototype = {
 
     preload: function() {
-      this.kibus = new Kibus(this);
-      this.worldd = new World(this);
+
     }, 
     
     create: function() {
 
+      g.world.draw();
       g.kibus.create();
       this.world.setBounds(0, 0, 640, 640);
-      this.game.camera.follow(this.kibus.sprite);
+      this.game.camera.follow(g.kibus.sprite);
     },
 
     update: function() {

@@ -25,31 +25,40 @@
 
     create: function() {
       this.pf = new Pathfinder();
+
       this.sprite = this.game.add.sprite(0, 0, 'kibus');
       this.sprite.animations.add('walk', [0, 1, 0, 2], true);
       this.sprite.animations.add('idle', [0], true);
       this.sprite.animations.play('walk', 6, true);
 
+      this.sprite.x = this.initialX*g.world.size;
+      this.sprite.y = this.initialY*g.world.size;
+      this.tileX = this.initialX;
+      this.tileY = this.initialY;
       this.cursors = this.game.input.keyboard.createCursorKeys();
     },
 
     update: function() {
 
-      if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) 
+      if (this.game.input.keyboard.isDown(Phaser.Keyboard.R)) 
         this.returnToHouse();
       if (this.tween == null || !this.tween.isRunning) this.move();
-      if (this.pf.path.length === 0) {
+      if (this.tileX == this.initialX && this.tileY == this.initialY) {
         this.pf.reset();
         this.canMove = true;
+
       }
-      console.log(this.tween);
     },
 
+    getTile: function() {
+      return { x: this.sprite.x/64, y: this.sprite.y/64 };
+    },
 
     move: function() {
       if (!this.canMove) return;
       if (this.cursors.up.isDown) {
 
+        console.log(this.tileX, this.tileY);
         if (!g.world.collideTile(this.tileX, this.tileY - 1)) {
           this.moveOneTile('UP');
           this.pf.push('UP');
@@ -118,7 +127,9 @@
 
       this.canMove = false;
 
-      this.moveOneTile(this.pf.pop());
+      this.pf.returnPath.forEach(function(e, index, a) {
+        _this.moveOneTile(e);
+      });
 
     }
 
