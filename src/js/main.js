@@ -4,6 +4,7 @@ window.onload = function () {
   var 
   game,
   ns = window['tutorial'];
+  window.g = {};
 
   game = new Phaser.Game(480, 480, Phaser.AUTO, 'tutorial-game');
   game.state.add('boot', ns.Boot);

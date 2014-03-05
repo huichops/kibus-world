@@ -34,6 +34,11 @@
 
     pop: function() {
       return this.reverseDirection(this.path.pop());
+    },
+
+    reset: function() {
+      this.path.length = 0;
+      this.returnPath.length = 0;
     }
 
   }; 

@@ -9,12 +9,11 @@
   Preloader.prototype = {
 
     preload: function() {
-      var 
-      world = new World(this),
-      kibus = new Kibus(this);
       
-      kibus.preload();
-      world.preload();
+      g.kibus = new Kibus(this);
+      g.world = new World(this);
+      g.kibus.preload();
+      g.world.preload();
 
       this.asset = this.add.sprite(240, 240, 'preloader');
       this.asset.anchor.setTo(0.5, 0.5);

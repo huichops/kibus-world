@@ -38,11 +38,11 @@
       if (this.game.input.keyboard.isDown(Phaser.Keyboard.SPACEBAR)) 
         this.returnToHouse();
       if (this.tween == null || !this.tween.isRunning) this.move();
-      if (this.tileX == this.initialX && this.tileY == this.initialY) {
+      if (this.pf.path.length === 0) {
         this.pf.reset();
         this.canMove = true;
-
       }
+      console.log(this.tween);
     },
 
 
@@ -50,14 +50,14 @@
       if (!this.canMove) return;
       if (this.cursors.up.isDown) {
 
-        if (!this.game.worldd.collideTile(this.tileX, this.tileY - 1)) {
+        if (!g.world.collideTile(this.tileX, this.tileY - 1)) {
           this.moveOneTile('UP');
           this.pf.push('UP');
         }
 
       } else if (this.cursors.down.isDown) {
 
-        if (!this.game.worldd.collideTile(this.tileX, this.tileY + 1)) {
+        if (!g.world.collideTile(this.tileX, this.tileY + 1)) {
           this.moveOneTile('DOWN');
           this.pf.push('DOWN');
         }
@@ -65,14 +65,14 @@
 
       if (this.cursors.left.isDown) {
 
-        if (!this.game.worldd.collideTile(this.tileX - 1, this.tileY)) {
+        if (!g.world.collideTile(this.tileX - 1, this.tileY)) {
           this.moveOneTile('LEFT');
           this.pf.push('LEFT');
         }
 
       } else if (this.cursors.right.isDown) {
 
-        if (!this.game.worldd.collideTile(this.tileX + 1, this.tileY)) {
+        if (!g.world.collideTile(this.tileX + 1, this.tileY)) {
           this.moveOneTile('RIGHT');
           this.pf.push('RIGHT');
         }
@@ -96,8 +96,8 @@
     setTilePos: function(x, y) {
 
       var 
-      amountX = x*this.game.worldd.size,
-      amountY = y*this.game.worldd.size;
+      amountX = x*g.world.size,
+      amountY = y*g.world.size;
       this.tileX = x;
       this.tileY = y;
       if (!this.canMove) {
@@ -118,9 +118,7 @@
 
       this.canMove = false;
 
-      this.pf.returnPath.forEach(function(e, index, a) {
-        _this.moveOneTile(e);
-      });
+      this.moveOneTile(this.pf.pop());
 
     }
 
