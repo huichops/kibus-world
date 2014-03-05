@@ -6,7 +6,8 @@ window.onload = function () {
   ns = window['tutorial'];
   window.g = {};
 
-  game = new Phaser.Game(480, 480, Phaser.AUTO, 'tutorial-game');
+  g.size = 64;
+  game = new Phaser.Game(640, 640, Phaser.AUTO, 'tutorial-game');
   game.state.add('boot', ns.Boot);
   game.state.add('preloader', ns.Preloader);
   game.state.add('menu', ns.Menu);

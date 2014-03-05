@@ -89,7 +89,7 @@ gulp.task('test', function() {
 gulp.task('connect', connect.server({
   root: [__dirname + '/src'],
   port: 9000,
-  livereload: true,
+  livereload: false,
   open: {
     browser: 'firefox' // if not working on OSX try: 'Google Chrome'
   }

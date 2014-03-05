@@ -7,11 +7,20 @@ html, body {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  margin: 0;
   background: #000;
 }
 
 .game {
-  width: 640px;
-  height: 480px;
-  margin: 20px auto;
+  max-width: 640px;
+  max-height: 640px;
+  margin: 0px auto;
 }
+
+.sidemenu {
+  position: fixed;
+  height: 100%;
+  width: 20%;
+  background-color: red;
+}
+

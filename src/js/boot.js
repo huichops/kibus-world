@@ -10,7 +10,10 @@
     },
 
     create: function () {
+      this.game.stage.ScaleMode = Phaser.StageScaleMode.SHOW_ALL;
       this.game.input.maxPointers = 1;
+      this.game.stage.scale.setShowAll();
+      this.game.stage.scale.refresh();
       // this.game.stage.disableVisibilityChange = true;
 
       if (this.game.device.desktop) {

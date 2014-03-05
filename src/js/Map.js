@@ -7,8 +7,8 @@
     this.sprite = null;
     this.obstacle = null;
     this.data = [];
-    this.ROWS = rows || 10;
-    this.COLS = cols || 10;
+    this.ROWS = rows || 15;
+    this.COLS = cols || 15;
     this.size = 64;
 
   }

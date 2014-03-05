@@ -1,12 +1,7 @@
 (function() {
   'use strict';
 
-  function Setup() {
-    this.kibus = null;
-    this.obstacles = null;
-    this.worldd = null;
-    this.setup = true;
-  }
+  function Setup() { }
 
   Setup.prototype = {
 
@@ -27,7 +22,7 @@
         }
 
       });
-      this.world.setBounds(0, 0, 640, 640);
+      this.world.setBounds(0, 0, 960, 960);
       this.game.camera.follow(g.kibus.sprite);
     },
 

@@ -13,7 +13,7 @@
 
       g.world.draw();
       g.kibus.create();
-      this.world.setBounds(0, 0, 640, 640);
+      this.world.setBounds(0, 0, 960, 960);
       this.game.camera.follow(g.kibus.sprite);
     },
 
