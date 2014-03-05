@@ -16,7 +16,7 @@
       kibus.preload();
       world.preload();
 
-      this.asset = this.add.sprite(320, 240, 'preloader');
+      this.asset = this.add.sprite(240, 240, 'preloader');
       this.asset.anchor.setTo(0.5, 0.5);
 
       this.load.onLoadComplete.addOnce(this.onLoadComplete, this);

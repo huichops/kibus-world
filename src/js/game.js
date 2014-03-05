@@ -5,6 +5,7 @@
     this.kibus = null;
     this.obstacles = null;
     this.worldd = null;
+    this.setup = true;
   }
 
   Game.prototype = {
@@ -23,9 +24,7 @@
     },
 
     update: function() {
-
       this.kibus.update();
-
     },
 
     onInputDown: function() {

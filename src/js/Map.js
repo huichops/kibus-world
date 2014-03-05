@@ -61,6 +61,10 @@
       } else {
         return false;
       }
+    },
+
+    reset: function() {
+        this.returnPath.length = 0;
     }
     
   };
