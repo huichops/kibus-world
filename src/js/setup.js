@@ -8,6 +8,7 @@
     create: function() {
       g.world.create();
       g.world.draw();
+      g.house.create();
       g.kibus.create();
       g.kibus.sprite.inputEnabled = true;
       g.kibus.sprite.input.enableDrag(false, true);

@@ -1,7 +1,9 @@
 (function() {
   'use strict';
 
-  function Game() { }
+  function Game() { 
+    this.setup = true;
+  }
 
   Game.prototype = {
 
