@@ -1,9 +1,7 @@
 (function() {
   'use strict';
 
-  function Game() { 
-    this.setup = true;
-  }
+  function Game() { }
 
   Game.prototype = {
 
@@ -15,6 +13,7 @@
 
       g.world.draw();
       g.kibus.create();
+      g.house.create();
       this.world.setBounds(0, 0, 960, 960);
       this.game.camera.follow(g.kibus.sprite);
     },

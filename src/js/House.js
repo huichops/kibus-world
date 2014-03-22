@@ -9,6 +9,8 @@
     this.canMove = true;
     this.tileX = 0;
     this.tileY = 0;
+    this.initialX = 0;
+    this.initialY = 0;
   }
 
   House.prototype = {
@@ -22,8 +24,10 @@
 
       this.sprite = this.game.add.sprite(64, 64, 'house');
 
-//      this.sprite.x = this.tileX*g.world.size;
-//      this.sprite.y = this.tileY*g.world.size;
+      this.sprite.x = this.initialX*g.world.size;
+      this.sprite.y = this.initialY*g.world.size;
+      this.tileX = this.initialX;
+      this.tileY = this.initialY;
     },
 
     update: function() {
