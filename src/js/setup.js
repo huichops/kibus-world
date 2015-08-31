@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  function Setup() { 
+  function Setup() {
     this.states = {
       kibus: 0,
       house: 1,
@@ -22,7 +22,9 @@
       g.world.draw();
       this.setKibus();
 
-      this.text = this.add.bitmapText(0, 400, 'set Kibus',
+      this.text = this.add.bitmapText(0, 400, 'Drag Kibus to starting position',
+        {font: '16px minecraftia', align: 'center'});
+      this.keyText = this.add.bitmapText(0, 400, 'Press Space when ready',
         {font: '16px minecraftia', align: 'center'});
       this.world.setBounds(0, 0, 960, 960);
     },

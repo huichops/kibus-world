@@ -7,13 +7,15 @@
 
     preload: function() {
 
-    }, 
-    
+    },
+
     create: function() {
 
       g.world.draw();
       g.kibus.create();
       g.house.create();
+      this.text = this.add.bitmapText(0, 400, 'Press R to go back',
+        {font: '16px minecraftia', align: 'center'});
       this.world.setBounds(0, 0, 960, 960);
       this.game.camera.follow(g.kibus.sprite);
     },
