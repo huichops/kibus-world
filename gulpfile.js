@@ -16,7 +16,7 @@ var gulp = require('gulp'),
 paths = {
   test: 'test/**/*',
   assets: 'src/assets/**/*',
-  css:    'src/css/*.css', 
+  css:    'src/css/*.css',
   js:     ['src/js/**/*.js', '!src/js/lib/*.js'],
   dist:   './dist/'
 };
@@ -72,8 +72,7 @@ gulp.task('jshint', function() {
 });
 
 gulp.task('test', function() {
-  var 
-  args = [ __dirname + '/test/index.html' ]; 
+  var args = [ __dirname + '/test/index.html' ];
   phantomMochaChild = spawn( 'mocha-phantomjs', args );
 
   phantomMochaChild.stdout.on( 'data', function(data) {
@@ -86,14 +85,16 @@ gulp.task('test', function() {
 
 });
 
-gulp.task('connect', connect.server({
-  root: [__dirname + '/src'],
-  port: 9000,
-  livereload: false,
-  open: {
-    browser: 'firefox' // if not working on OSX try: 'Google Chrome'
-  }
-}));
+gulp.task('connect', function() {
+  connect.server({
+    root: [__dirname + '/src'],
+    port: 9000,
+    livereload: false,
+    open: {
+      browser: 'Google Chrome' // if not working on OSX try: 'Google Chrome'
+    }
+  });
+});
 
 gulp.task('watch', function () {
   gulp.watch([paths.js, paths.test], ['jshint', 'test']);
